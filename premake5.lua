@@ -11,6 +11,8 @@ workspace "FalafelCraft"
 
 outdir = "%{cfg.buildcfg}-%{cfg.architecture}"
 
+include "Engine/vendor/glfw/"
+
 project "Engine"
 	location "Engine"
 	kind "StaticLib"
@@ -29,7 +31,13 @@ project "Engine"
 	
 	includedirs
 	{
-		"%{prj.name}/src"
+		"%{prj.name}/src",
+		"%{prj.name}/vendor/glfw/glfw/include"
+	}
+	
+	links
+	{
+		"glfw"
 	}
 	
 	filter "system:windows"
