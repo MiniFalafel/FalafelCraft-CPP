@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Window.h"
+#include "Events/Event.h"
 
 namespace FC
 {
@@ -14,6 +15,8 @@ namespace FC
 		virtual ~Application();
 
 		void Run();
+
+		void OnEvent(const Event& e);
 	};
 
 	Application* CreateApplication();
