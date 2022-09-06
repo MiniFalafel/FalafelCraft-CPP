@@ -6,8 +6,6 @@
 
 namespace FC
 {
-	typedef int KeyCode;
-
 	class KeyEvent : public Event
 	{
 	private:

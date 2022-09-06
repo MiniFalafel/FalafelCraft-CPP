@@ -41,8 +41,10 @@ namespace FC
 
 		ProcAddressGetter GetGlfwGLProcAddress() const;
 
-		bool ShouldClose();
-		void Update();
+		void* GetNativeWindow() const;
+
+		bool ShouldClose() const;
+		void Update() const;
 	};
 
 }

@@ -135,12 +135,17 @@ namespace FC
 		return glfwGetProcAddress;
 	}
 
-	bool Window::ShouldClose()
+	void* Window::GetNativeWindow() const
+	{
+		return (void*)m_Window;
+	}
+
+	bool Window::ShouldClose() const
 	{
 		return glfwWindowShouldClose(m_Window);
 	}
 
-	void Window::Update()
+	void Window::Update() const
 	{
 		glfwSwapBuffers(m_Window);
 		glfwPollEvents();

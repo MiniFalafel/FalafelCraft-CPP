@@ -1,3 +1,4 @@
+#include "Core/Core.h"
 #include "Application.h"
 
 #include <iostream>
@@ -7,14 +8,23 @@
 #include "Events/KeyEvent.h"
 #include "Events/MouseEvent.h"
 
+#include "Core/Input.h"
+
 namespace FC
 {
-	Application::Application()
-		: m_Window(new Window( { 1280, 720, "App Window" } ))
-	{
-		m_Window->SetEventFnCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
+	Application* Application::s_ApplicationInstance = nullptr;
 
+	Application::Application()
+		: m_Window(new Window( { 1280, 720, "Game Window" } ))
+	{
+		// Make sure that no other instances have been made.
+		FC_ASSERT(!s_ApplicationInstance, "An instance of Application already exists!");
+		s_ApplicationInstance = this;
+
+		// Initialize glad
 		Renderer::Init(m_Window->GetGlfwGLProcAddress());
+		//	Set m_Window event function callback.
+		m_Window->SetEventFnCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 
 		std::cout << "Created application.\n";
 	}
@@ -22,7 +32,13 @@ namespace FC
 	Application::~Application()
 	{
 		delete m_Window;
+		s_ApplicationInstance = nullptr;
 		std::cout << "Destroyed application.\n";
+	}
+
+	Window* Application::GetWindow() const
+	{
+		return m_Window;
 	}
 
 	void Application::Run()
@@ -33,6 +49,12 @@ namespace FC
 			// Do stuff
 			Renderer::SetClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 			Renderer::Clear();
+			
+			{
+				if (Input::IsKeyPressed(FC_KEY_W))
+					std::cout << "Input polling works! classic MiniFalafel W. B)\n";
+			}
+
 			m_Window->Update();
 		}
 
@@ -40,15 +62,6 @@ namespace FC
 
 	void Application::OnEvent(const Event& e)
 	{
-		if (e.GetEventType() == EventType::WindowResized)
-		{
-			WindowResizedEvent* _event = (WindowResizedEvent*)&e;
-			std::cout << "New Window Size: " << _event->GetWidth()  << ", " << _event->GetHeight() << '\n';
-		}
-		if (e.GetEventType() == EventType::KeyTyped)
-		{
-			KeyTypedEvent* _event = (KeyTypedEvent*)&e;
-			std::cout << _event->GetKeyCode() << '\n';
-		}
+		// Handle Events
 	}
 }

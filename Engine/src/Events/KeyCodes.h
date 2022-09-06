@@ -1,5 +1,7 @@
 #pragma once
 
+typedef int KeyCode;
+
 /* COPIED FROM GLFW/glfw3.h FILE */
 /* We're doing this so that we don't have to include all of GLFW/glfw3.h
    into our KeyEvent.h and MouseEvent.h files. */

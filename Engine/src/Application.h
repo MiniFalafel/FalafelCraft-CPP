@@ -11,12 +11,17 @@ namespace FC
 	private:
 		Window* m_Window;
 
+		static Application* s_ApplicationInstance;
+
 	public:
 		Application();
 		virtual ~Application();
 
-		void Run();
+		inline static Application* Get() { return s_ApplicationInstance; }
 
+		Window* GetWindow() const;
+
+		void Run();
 		void OnEvent(const Event& e);
 	};
 

@@ -5,8 +5,6 @@
 
 namespace FC
 {
-	typedef int MouseButtonCode;
-
 	class MouseButtonEvent : public Event
 	{
 	private:
