@@ -23,11 +23,19 @@ namespace FC
 		if (!s_GLFWInitialized)
 		{
 			int success = glfwInit();
-			FC_ASSERT(success);
+			FC_ASSERT(success, "glfw failed to initialize!");
 			s_GLFWInitialized = true;
 		}
 
+		// Window Hints
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 		m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		FC_ASSERT(m_Window, "Failed to create glfw window!");
+
+		glfwMakeContextCurrent(m_Window);
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 
@@ -120,6 +128,11 @@ namespace FC
 	void Window::SetEventFnCallback(const std::function<void(const Event&)>& func)
 	{
 		m_Data.EventFnCallback = func;
+	}
+
+	ProcAddressGetter Window::GetGlfwGLProcAddress() const
+	{
+		return glfwGetProcAddress;
 	}
 
 	bool Window::ShouldClose()

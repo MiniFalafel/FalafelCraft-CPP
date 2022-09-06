@@ -5,7 +5,7 @@ project "glfw"
 	staticruntime "on"
 	
 	targetdir ("bin/" .. outdir .. "/%{prj.name}")
-	objdir ("intermediates/" .. outdir .. "/%{prj.name}")
+	objdir ("bin/intermediates/" .. outdir .. "/%{prj.name}")
 	
 	files
 	{

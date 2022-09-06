@@ -2,6 +2,7 @@
 
 #include <string>
 #include "Events/Event.h"
+#include "Renderer/GLProc.h"
 
 #include <functional>
 
@@ -37,6 +38,8 @@ namespace FC
 		~Window();
 
 		void SetEventFnCallback(const std::function<void(const Event&)>& func);
+
+		ProcAddressGetter GetGlfwGLProcAddress() const;
 
 		bool ShouldClose();
 		void Update();

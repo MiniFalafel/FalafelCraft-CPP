@@ -14,6 +14,8 @@ namespace FC
 	{
 		m_Window->SetEventFnCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 
+		Renderer::Init(m_Window->GetGlfwGLProcAddress());
+
 		std::cout << "Created application.\n";
 	}
 	
@@ -29,6 +31,8 @@ namespace FC
 		while (!m_Window->ShouldClose())
 		{
 			// Do stuff
+			Renderer::SetClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+			Renderer::Clear();
 			m_Window->Update();
 		}
 

@@ -2,6 +2,7 @@
 
 #include "Window.h"
 #include "Events/Event.h"
+#include "Renderer/Renderer.h"
 
 namespace FC
 {

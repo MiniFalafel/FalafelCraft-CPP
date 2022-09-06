@@ -12,6 +12,7 @@ workspace "FalafelCraft"
 outdir = "%{cfg.buildcfg}-%{cfg.architecture}"
 
 include "Engine/vendor/glfw/"
+include "Engine/vendor/glad/"
 
 project "Engine"
 	location "Engine"
@@ -21,7 +22,7 @@ project "Engine"
 	staticruntime "on"
 	
 	targetdir ("bin/" .. outdir .. "/%{prj.name}")
-	objdir ("intermediates/" .. outdir .. "/%{prj.name}")
+	objdir ("bin/intermediates/" .. outdir .. "/%{prj.name}")
 	
 	files
 	{
@@ -29,15 +30,23 @@ project "Engine"
 		"%{prj.name}/src/**.h"
 	}
 	
+	defines
+	{
+		"GLFW_INCLUDE_NONE"
+	}
+	
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/glfw/glfw/include"
+		"%{prj.name}/vendor/glfw/glfw/include",
+		"%{prj.name}/vendor/glad/glad/include"
 	}
 	
 	links
 	{
-		"glfw"
+		"glad",
+		"glfw",
+		"opengl32.lib"
 	}
 	
 	filter "system:windows"
