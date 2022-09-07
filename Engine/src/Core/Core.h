@@ -9,7 +9,7 @@
 #endif
 
 #ifdef FC_ENABLE_ASSERTS
-#define FC_ASSERT(x, message) if(!(x)) { std::cout << "Assertion failed:\n    " << message << '\n'; __debugbreak(); }
+#define FC_ASSERT(x, message) if(!(x)) { std::cout << "Assertion failed: " message "\n"; __debugbreak(); }
 #else
 #define FC_ASSERT(x, message)
 #endif
