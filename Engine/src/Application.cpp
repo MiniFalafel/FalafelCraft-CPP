@@ -17,6 +17,7 @@ namespace FC
 	Application::Application()
 		: m_Window(new Window( { 1280, 720, "Game Window" } ))
 	{
+		Logger::Init();
 		// Make sure that no other instances have been made.
 		FC_ASSERT(!s_ApplicationInstance, "An instance of Application already exists!");
 		s_ApplicationInstance = this;
@@ -26,14 +27,14 @@ namespace FC
 		//	Set m_Window event function callback.
 		m_Window->SetEventFnCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 
-		std::cout << "Created application.\n";
+		FC_INFO("Created Application.");
 	}
 	
 	Application::~Application()
 	{
 		delete m_Window;
 		s_ApplicationInstance = nullptr;
-		std::cout << "Destroyed application.\n";
+		FC_INFO("Destroyed application.\n");
 	}
 
 	Window* Application::GetWindow() const
@@ -52,7 +53,7 @@ namespace FC
 			
 			{
 				if (Input::IsKeyPressed(FC_KEY_W))
-					std::cout << "Input polling works! classic MiniFalafel W. B)\n";
+					FC_TRACE("Input polling works! classic MiniFalafel W. B)");
 			}
 
 			m_Window->Update();

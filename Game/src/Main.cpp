@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "EntryPoint.h"
+#include "Core/Core.h"
 
 #include <iostream>
 
@@ -8,12 +9,12 @@ class FalafelCraft : public FC::Application
 public:
 	FalafelCraft()
 	{
-		std::cout << "Created FalafelCraft Application.\n";
+		FC_INFO("Created FalafelCraft Application.");
 	}
 
 	~FalafelCraft()
 	{
-		std::cout << "Destroyed FalafelCraft Application.\n";
+		FC_INFO("Destroyed FalafelCraft Application.");
 	}
 };
 
