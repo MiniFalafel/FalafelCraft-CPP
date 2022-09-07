@@ -33,7 +33,7 @@ namespace FC
 	public:
 		KeyReleasedEvent(KeyCode keyCode) : KeyEvent(keyCode) {}
 
-		EVENT_TYPE_METHODS(EventType::KeyPressed);
+		EVENT_TYPE_METHODS(EventType::KeyReleased);
 	};
 
 	class KeyTypedEvent : public KeyEvent
