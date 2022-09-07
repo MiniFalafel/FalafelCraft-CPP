@@ -45,6 +45,8 @@ namespace FC
 
 		bool ShouldClose() const;
 		void Update() const;
+
+		void SetVsync(bool vsync) const;
 	};
 
 }

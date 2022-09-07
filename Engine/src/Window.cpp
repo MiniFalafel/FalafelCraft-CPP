@@ -151,4 +151,9 @@ namespace FC
 		glfwPollEvents();
 	}
 
+	void Window::SetVsync(bool vsync) const
+	{
+		glfwSwapInterval((int)vsync); // False will be 0, true will be 1
+	}
+
 }
