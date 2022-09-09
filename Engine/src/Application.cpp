@@ -27,12 +27,16 @@ namespace FC
 		//	Set m_Window event function callback.
 		m_Window->SetEventFnCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 
+		// Initialize m_Time
+		m_Time = Time::GetTime();
+
 		FC_INFO("Created Application.");
 	}
 	
 	Application::~Application()
 	{
 		delete m_Window;
+		m_LayerStack.Shutdown();
 		s_ApplicationInstance = nullptr;
 		FC_INFO("Destroyed application.\n");
 	}
@@ -42,11 +46,29 @@ namespace FC
 		return m_Window;
 	}
 
+	void Application::PushLayer(Layer* layer)
+	{
+		m_LayerStack.PushLayer(layer);
+	}
+
+	void Application::PopLayer(Layer* layer)
+	{
+		m_LayerStack.PopLayer(layer);
+	}
+
 	void Application::Run()
 	{
 
 		while (!m_Window->ShouldClose())
 		{
+			// Update m_Time
+			TimePoint now = Time::GetTime();
+			double dt = std::chrono::duration<double>(now - m_Time).count();
+			m_Time = now;
+
+			// Update Layers
+			m_LayerStack.OnUpdate(dt);
+
 			// Do stuff
 			Renderer::SetClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 			Renderer::Clear();
@@ -63,6 +85,6 @@ namespace FC
 
 	void Application::OnEvent(const Event& e)
 	{
-		// Handle Events
+		m_LayerStack.OnEvent(e);
 	}
 }
