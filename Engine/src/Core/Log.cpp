@@ -1,9 +1,8 @@
 #include "Log.h"
 
-#include <string_view>
-
 namespace FC
 {
+
 	void Logger::Init()
 	{
 		std::cout.flush();
@@ -11,7 +10,7 @@ namespace FC
 
 	void Logger::SetLogLevel(LogLevel level) { m_LogLevel = level; }
 
-	void Logger::Log(const char* message, LogLevel level)
+	void Logger::Log(std::string message, LogLevel level)
 	{
 		if (level > m_LogLevel - 1)
 			std::cout << m_LogLevelColors[level] << message << "\x1b[0m\n";

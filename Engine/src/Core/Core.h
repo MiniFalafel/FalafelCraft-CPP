@@ -15,10 +15,10 @@
 #endif
 
 #ifdef FC_ENABLE_LOGGING
-#define FC_TRACE(x) FC::Logger::Log("[TRACE]: " x, FC::LogLevelTRACE)
-#define FC_INFO(x)  FC::Logger::Log("[INFO]: " x, FC::LogLevelINFO)
-#define FC_WARN(x)  FC::Logger::Log("[WARNING]: " x, FC::LogLevelWARNING)
-#define FC_ERROR(x) FC::Logger::Log("[ERROR]: " x, FC::LogLevelERROR)
+#define FC_TRACE(...) FC::Logger::Log(std::string("[TRACE]: ") + FC::format(__VA_ARGS__), FC::LogLevelTRACE)
+#define FC_INFO(...)  FC::Logger::Log(std::string("[INFO]: ") + FC::format(__VA_ARGS__), FC::LogLevelINFO)
+#define FC_WARN(...)  FC::Logger::Log(std::string("[WARNING]: ") + FC::format(__VA_ARGS__), FC::LogLevelWARNING)
+#define FC_ERROR(...) FC::Logger::Log(std::string("[ERROR]: ") + FC::format(__VA_ARGS__), FC::LogLevelERROR)
 #else
 #define FC_TRACE(x)
 #define FC_INFO(x)
