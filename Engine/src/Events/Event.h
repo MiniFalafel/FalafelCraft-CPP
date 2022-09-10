@@ -17,7 +17,7 @@ namespace FC
 	{
 	public:
 		Event() = default;
-		~Event() = default;
+		virtual ~Event() = default;
 
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetTypeName() const = 0;
